@@ -1,0 +1,71 @@
+第一天
+
+1 当页面缩小到手机端的时候,会出现不在同一行(brand在一行,nav在下一行)
+	原因是字号设置为18px 改为16px就好了
+
+2 本来brand的宽度我设为了300px,导致整个一行放不开了,brand自成一行.
+
+3 设置导航栏hover状态的border-bottom的红色线条时,可以用浏览器的hover自带功能,然后拷贝粘贴代码带sublime中
+
+4 响应式布局可以直接调用bootstrap的hidden-xxx类,或者visible-xxx类(visible可以设置display的属性)eg:visible-xxx-block
+
+5 手机端的那个按钮(汉堡菜单),可以直接调用组件
+			<div class="navbar-header">
+	 		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	            <span class="sr-only">切换菜单</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	        </div>
+
+          	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          		<ul class="nav navbar-nav">
+          		</ul>
+          	</div>
+
+6 viewport 主要是移动端的时候有用,保持缩放 字体大小等设置 一般格式如下
+  		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+7 版本判断 如果是低版本浏览器则引入html5shiv和respond的js文件
+
+  <!--[if lt IE 9]>
+    <script src="lib/html5shiv/html5shiv.min.js"></script>
+    <script src="lib/respond/respond.min.js"></script>
+  <![endif]-->
+
+
+8 如果设置头部nav的高度,在手机端点击汉堡按钮的时候会出现bug,广告轮播栏不会弹下去给汉堡栏让空.
+不要设置nav的高度
+
+第二天
+
+1 轮播图如果用原生的bootstrap,随着屏幕的缩小,图片会跟着缩小,效果不好,而且图片本来的宽高与它的父盒子的宽高不一致
+这时可以把图片设置为div的bgi ,然后设置
+
+#main_ad .carousel-inner .item {
+  height: 410px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+这样图片随着屏幕变小,会一直在正中心而且高度不会变.
+
+
+2 一定要分清data和date啊
+each取出的item是DOM,要换成jQuery
+
+
+第三天
+
+1 设置横向滚动条 用js,在ul外设置一个ulwrapper,设置ulwrapper有一个横向滚动条,并且动态利用js设置ul的宽度,要设一个初始宽度为40或者50,因为有一个padding-left
+
+2 设置tooltips,利用bootstrap插件,要注意,如果下面一个是div,那么会出现问题,不会在上面弹出,只会在右边弹出
+
+
+3 在设置移动端轮播图左右滑动时,touchend没法获得clientX,要利用touchmove来获得endX,在touchend时再比大小,触发轮播图的carousel方法("next"/"prev")
+最好有个阈值来限定最小移动的像素,否则体验相当差
+
+
+
